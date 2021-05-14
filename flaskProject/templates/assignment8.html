@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment8</title>
+    {% include('include_CSS_JS.html') %}
+</head>
+<body onload="introFunction()">
+{% include('include_header.html') %}
+
+{% include('include_top.html') %}
+
+<main class="row-main">
+
+{% if user_name %}
+<div class="col-6">
+<h1>{{ user_name.firstname }}'s Hobbies Are:</h1>
+    <ol>
+    {% for hobby in hobbies %}
+        <li>
+        {{ hobby | capitalize}}
+        </li>
+      {% endfor %}
+    </ol>
+</div>
+<div class="col-6">
+<h1>{{ user_name.firstname }}'s Music Preferences Are:</h1>
+    <ul>
+    {% for genre in music %}
+        <li>
+        {{ genre | upper}}
+        </li>
+      {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+    <h1>{{ stranger_string.str | center}}</h1>
+{% endif %}
+<div class="col-12">
+{% block Friends %}
+    <a href=" {{ url_for('with_friends') }}"><button>assignment 8 with Friends(BLOCK)</button></a>
+{% endblock %}
+</div>
+
+
+
+</main>
+
+{% include('include_footer.html') %}
+
+</body>
+</html>

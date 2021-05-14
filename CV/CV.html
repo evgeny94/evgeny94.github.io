@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CV-Evgeny Musatov</title>
+    <link rel="stylesheet" href="CV.css">
+    <script src="CV.js"></script>
+    <meta name=" content =" width=device width, initial scale=1.0>
+</head>
+<body onload="introFunction()">
+
+<div class="row-header">
+    <div class="col-1">
+        <a href="https://www.facebook.com/evgenymusatov/" target="_blank">
+            <img src="../CV/Pics/Facebook_icon_2013.svg.png" width="15px" height="15px">Facebook</a></div>
+    <div class="col-1"><a href="https://www.linkedin.com/in/evgeny-musatov-26b2ab1b9/" target="_blank">
+        <img src="../CV/Pics/linkedin%20logo.png" width="15px" height="15px"><br>LinkedIn</a></div>
+    <div class="col-1"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=Evgenymusatov94@gmail.com"
+                          target="_blank">
+        <img src="../CV/Pics/512px-Gmail_icon_(2020).svg.png" width="15px" height="15px"><br>Gmail</a></div>
+    <div class="col-1"><a href="https://github.com/evgeny94" target="_blank">
+        <img src="../CV/Pics/GitHub-Mark.png" width="15px" height="15px"><br>GitHub</a></div>
+    <div class="col-3" id="legacy"></div>
+    <div class="col-1">About<br></div>
+    <div class="col-1">Skills</div>
+    <div class="col-1">Portfolio</div>
+    <div class="col-1">Experience</div>
+    <div class="col-1">Contact</div>
+</div>
+
+<div class="row-top">
+    <div class="col-12-top">
+        <div class="col-3-shake"><br><br><br><br><br><br><br><br>
+            <button id="button-hire">Hire Me</button>
+        </div>
+        <div class="col-3">
+            <h1 id="myname">Evgeny Musatov</h1><br>
+            <img src="../CV/Pics/me.jpg" id="myimage">
+        </div>
+        <div class="col-3-shake"><br><br><br><br><br><br><br><br>
+            <button id="button-download" onclick="downloadCV()">Download CV</button>
+        </div>
+    </div>
+</div>
+
+<div class="row-main">
+    <div class="col-12">
+       <a href="Contact%20List.html"><button>Contact List</button></a>
+    </div>
+    <div class="ttrow1">
+        <div class="col-6">
+            <h2>About</h2>
+            <ul>
+                <li>3-rd year engineering student</li>
+                <li>Self-disciplined</li>
+                <li>Well organized</li>
+                <li>Strive for professionalism</li>
+                <li>High self-learning abilities</li>
+            </ul>
+        </div>
+        <div class="col-6">
+            <h2>Basic Information</h2>
+            <ul>
+                <li>Specializing in information systems</li>
+                <li>Study at Ben-Gurion University</li>
+                <li>English, Russian and Hebrew - Fluent</li>
+                <li>27 Years Old</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ttrow2">
+        <div class="col-12">
+            <h2>Professional Skills</h2>
+            <h4>General</h4>
+            <ul>
+                <li>Problem solving and advanced self-learning abilities</li>
+                <li>Ability to work in a team and make decisions under pressure</li>
+                <li>High analytical capabilities</li>
+            </ul>
+            <h4>Computers & Softwares</h4>
+            <ul>
+                <li>Java, Python, Object Oriented</li>
+                <li>Html, CSS, JavaScript</li>
+                <li>SQL, VBA, Excel</li>
+                <li>LabView, Solid-Works, R Studio</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ttrow3">
+        <div class="col-12">
+            <h2>Experience</h2>
+            <ul>
+                <li>Teacher at "Impulse" School</li>
+                <li>IDF, Commander of novices, Operations sergeant</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ttrow4">
+        <div class="col-12">
+            <h2>Portfolio</h2>
+            Will be update as soon as possible...
+        </div>
+    </div>
+</div>
+
+<div class="row-footer">
+    <div class="col-9">
+        <h2>Contact Me</h2>
+        <h5>Phone:</h5>
+        +972 54-6484531
+        <h5>E-mail:</h5>
+        Evgenymusatov94@gmail.com<br><br>
+        <h4>"I'll be back:"</h4>
+        <form>
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname"><br><br>
+            <label for="mail">E-mail:</label>
+            <input type="email" id="mail"><br><br>
+            <label for="phone">Phone:</label>
+            <input type="number" id="phone"><br><br>
+            <label>Note:</label><br>
+            <textarea cols="35" rows="5"></textarea><br><br>
+        </form>
+    </div>
+    <div class="col-3-footer">
+        <button id="goUp" onclick="topFunction()">Go-Up</button>
+    </div>
+
+</div>
+
+</body>
+</html>

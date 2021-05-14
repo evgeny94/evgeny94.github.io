@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CV-Evgeny Musatov</title>
+    {% include('include_CSS_JS.html') %}
+</head>
+<body onload="introFunction()">
+{% include('include_header.html') %}
+
+{% include('include_top.html') %}
+
+<main class="row-main">
+    <div class="col-12">
+        <div>
+            <a href="{{ url_for('contact_list') }}">
+                <button>Contact List</button>
+            </a>
+        </div>
+        <div>
+            <a href="{{ url_for('assignment8') }}">
+                <button>Assignment 8</button>
+            </a>
+        </div>
+    </div>
+    <div class="ttrow1">
+        <div class="col-6">
+            <h2>About</h2>
+            <ul>
+                <li>3-rd year engineering student</li>
+                <li>Self-disciplined</li>
+                <li>Well organized</li>
+                <li>Strive for professionalism</li>
+                <li>High self-learning abilities</li>
+            </ul>
+        </div>
+        <div class="col-6">
+            <h2>Basic Information</h2>
+            <ul>
+                <li>Specializing in information systems</li>
+                <li>Study at Ben-Gurion University</li>
+                <li>English, Russian and Hebrew - Fluent</li>
+                <li>27 Years Old</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ttrow2">
+        <div class="col-12">
+            <h2>Professional Skills</h2>
+            <h4>General</h4>
+            <ul>
+                <li>Problem solving and advanced self-learning abilities</li>
+                <li>Ability to work in a team and make decisions under pressure</li>
+                <li>High analytical capabilities</li>
+            </ul>
+            <h4>Computers & Softwares</h4>
+            <ul>
+                <li>Java, Python, Object Oriented</li>
+                <li>Html, CSS, JavaScript</li>
+                <li>SQL, VBA, Excel</li>
+                <li>LabView, Solid-Works, R Studio</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ttrow3">
+        <div class="col-12">
+            <h2>Experience</h2>
+            <ul>
+                <li>Teacher at "Impulse" School</li>
+                <li>IDF, Commander of novices, Operations sergeant</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ttrow4">
+        <div class="col-12">
+            <h2>Portfolio</h2>
+            Will be update as soon as possible...
+        </div>
+    </div>
+</main>
+
+{% include('include_footer.html') %}
+
+</body>
+</html>
