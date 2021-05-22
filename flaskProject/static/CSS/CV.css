@@ -72,7 +72,6 @@ body {
     padding: 15px;
     text-align: center;
 
-
 }
 
 [class*="row"] {
@@ -81,7 +80,10 @@ body {
 }
 main>div>div{
         margin: 0 0 2vmin 0 ;
+}
 
+main>div>form>div{
+        margin: 0 0 2vmin 0 ;
 }
 .col-3-shake {
     animation: shake .8s;

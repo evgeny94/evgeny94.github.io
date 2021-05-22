@@ -15,4 +15,14 @@
     <div class="col-1">Portfolio</div>
     <div class="col-1">Experience</div>
     <div class="col-1">Contact</div>
+    {% if session['logged']==True %}
+        <div class="col-12">Logged in : {{ session['user_name'] }}</div>
+        <div class="col-12">
+                <form method="delete" action="/logout">
+                    <div>
+                        <input type="submit" value="log-out">
+                    </div>
+                </form>
+            </div>
+    {% endif %}
 </header>
