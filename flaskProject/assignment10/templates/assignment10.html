@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment10</title>
+    {% include('include_CSS_JS.html') %}
+</head>
+<body onload="introFunction()">
+{% include('include_header.html') %}
+{% include('include_top.html') %}
+
+<main class="row-main">
+
+    <div class="col-4">
+        <h2>Insertion form</h2>
+        <form method="POST" action="/insert" name="Insertion form">
+            <div>
+                <input name="id" type="int" placeholder="ID">
+            </div>
+            <div>
+                <input name="name" type="text" placeholder="Full Name">
+            </div>
+            <div>
+                <input name="user_name" type="text" placeholder="Username">
+            </div>
+            <div>
+                <input name="email" type="email" placeholder="E-mail">
+            </div>
+            <div>
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+
+    <div class="col-4">
+        <h2>Update form</h2>
+        <form method="POST" action="/update" name="Update form">
+            <div>
+                <input name="id" type="int" placeholder="ID">
+            </div>
+            <div>
+                <input name="name" type="text" placeholder="Full Name">
+            </div>
+            <div>
+                <input name="user_name" type="text" placeholder="Username">
+            </div>
+            <div>
+                <input name="email" type="email" placeholder="E-mail">
+            </div>
+            <div>
+                <input type="submit">
+            </div>
+        </form>
+        <p>* Update by ID</p>
+    </div>
+
+
+    <div class="col-4">
+        <h2>Deletion form</h2>
+        <form method="POST" action="/delete" name="Deletion form">
+            <div>
+                <input name="id" type="int" placeholder="ID">
+            </div>
+            <div>
+                <input type="submit">
+            </div>
+        </form>
+                <p>* Delete by ID</p>
+    </div>
+
+    <div class="col-12">
+        <h2>List of users</h2>
+        {% for user in users %}
+            <div>
+                User ID : <b>{{ user.ID }}</b> , Full Name : <b>{{ user.Name }}</b> , User Name :
+                <b>{{ user.UserName }}</b> , E-mail : <b>{{ user.Email }}</b>
+            </div>
+        {% endfor %}
+    </div>
+
+</main>
+
+{% include('include_footer.html') %}
+
+</body>
+</html>

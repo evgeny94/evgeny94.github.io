@@ -1,4 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, send_file, request, session
+from flask import Flask, render_template, redirect, url_for, send_file, request, session, jsonify
+import mysql.connector
+from assignment10.assignment10 import assignment10
 
 app = Flask(__name__)
 app.secret_key = '123'
@@ -9,6 +11,114 @@ users = {
     "Karianne": {"name": "Patricia Lebsack", "email": "Julianne.OConner@kory.org", "id": "4"},
     "Kamren": {"name": "Chelsey Dietrich", "email": "Lucio_Hettinger@annie.ca", "id": "5"}
 }
+
+
+# -------------------------------------------------------#
+# --------------- Database Connection -------------------#
+# -------------------------------------------------------#
+def interact_db(query, query_type: str):
+    return_value = False
+    connection = mysql.connector.connect(host='localhost', user='root', passwd='root', database='assignment10')
+    cursor = connection.cursor(named_tuple=True)
+    cursor.execute(query)
+
+    if query_type == 'commit':
+        connection.commit()
+        return_value = True
+
+    if query_type == 'fetch':
+        query_result = cursor.fetchall()
+        return_value = query_result
+
+    connection.close()
+    cursor.close()
+    return return_value
+
+
+# -------------------------------------------------------#
+# ----------------------- INSERT ------------------------#
+# -------------------------------------------------------#
+
+@app.route('/insert', methods=['POST'])
+def assignment_insert():
+    if request.method == 'POST':
+        user_id = request.form['id']
+        user_fullname = request.form['name']
+        user_name = request.form['user_name']
+        user_email = request.form['email']
+        query = "INSERT INTO users VALUES('%s', '%s', '%s', '%s')" % (user_id, user_fullname, user_name, user_email)
+        query_result = interact_db(query=query, query_type='commit')
+        return redirect('/assignment10')
+
+
+# -------------------------------------------------------#
+# ----------------------- UPDATE ------------------------#
+# -------------------------------------------------------#
+@app.route('/update', methods=['POST', 'UPDATE'])
+def assignment_update():
+    if request.method == 'POST':
+        user_id = request.form['id']
+        if user_id != "":
+            user_fullname = request.form['name']
+            user_name = request.form['user_name']
+            user_email = request.form['email']
+            if user_fullname != "" and user_name != "" and user_email != "":
+                query = "UPDATE users SET Name = '%s', UserName = '%s', Email = '%s' WHERE ID='%s'" % (
+                    user_fullname, user_name, user_email, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+            elif user_fullname != "" and user_name != "":
+                query = "UPDATE users SET Name = '%s', UserName = '%s' WHERE ID='%s'" % (
+                    user_fullname, user_name, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+            elif user_fullname != "" and user_email != "":
+                query = "UPDATE users SET Name = '%s', Email = '%s' WHERE ID='%s'" % (
+                    user_fullname, user_email, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+            elif user_name != "" and user_email != "":
+                query = "UPDATE users SET UserName = '%s', Email = '%s' WHERE ID='%s'" % (
+                    user_name, user_email, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+            elif user_fullname != "" and user_name == "" and user_email == "":
+                query = "UPDATE users SET UserName = '%s' WHERE ID='%s'" % (user_fullname, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+            elif user_name != "" and user_fullname == "" and user_email == "":
+                query = "UPDATE users SET UserName = '%s' WHERE ID='%s'" % (user_name, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+            elif user_email != "" and user_name == "" and user_fullname == "":
+                query = "UPDATE users SET Email = '%s' WHERE ID='%s'" % (user_email, user_id)
+                query_result = interact_db(query=query, query_type='commit')
+                return redirect('/assignment10')
+    return redirect('/assignment10')
+
+
+# -------------------------------------------------------#
+# ----------------------- DELETE ------------------------#
+# -------------------------------------------------------#
+
+@app.route('/delete', methods=['POST'])
+def assignment_delete():
+    if request.method == 'POST':
+        user_id = request.form['id']
+        query = "DELETE FROM users WHERE ID='%s';" % user_id
+        query_result = interact_db(query=query, query_type='commit')
+        return redirect('/assignment10')
+
+
+# -------------------------------------------------------#
+# ----------------------- GET ---------------------------#
+# -------------------------------------------------------#
+@app.route('/assignment10', methods=['GET', 'POST', 'DELETE', 'UPDATE'])
+def assignment_get():
+    query = "select * from users ORDER BY ID asc"
+    query_result = interact_db(query=query, query_type='fetch')
+    return render_template('assignment10.html', template_folder='../assignment10/templates', users=query_result)
+    return render_template('templates/assignment10.html', users=query_result)
 
 
 @app.route('/main')
@@ -75,7 +185,8 @@ def assignment9():
         if 'user_name' in request.form:
             user_name = request.form['user_name']
             if user_name != '' and user_name not in users:
-                users[user_name] = {"name": request.form["name"], "id": request.form["id"], "email": request.form["email"]}
+                users[user_name] = {"name": request.form["name"], "id": request.form["id"],
+                                    "email": request.form["email"]}
                 session['user_name'] = user_name
                 session['logged'] = True
         else:
@@ -88,6 +199,39 @@ def logout():
     session.clear()
     return redirect(url_for('assignment9'))
 
+
+# -------------------------------------------------------#
+# ------------------ Assignment 11 ----------------------#
+# -------------------------------------------------------#
+
+@app.route('/assignment11/users')
+def users_list():
+    query = "select * from users ORDER BY ID asc"
+    query_result = interact_db(query=query, query_type='fetch')
+    response = query_result
+    response = jsonify(response)
+    return response
+
+
+@app.route('/assignment11/users/selected', defaults={'SOME_USER_ID': 0})
+@app.route('/assignment11/users/selected/<int:SOME_USER_ID>')
+def user_details(SOME_USER_ID):
+    response = {}
+    query = "select * from users where ID='%s';" % SOME_USER_ID
+    query_result = interact_db(query=query, query_type='fetch')
+    if len(query_result) != 0:
+        response = query_result[0]
+    else:
+        response = "There is no such user. Try again..."
+
+    response = jsonify(response)
+    return response
+
+
+# -------------------------------------------------------#
+# ------------------- BluePrint 10 ----------------------#
+# -------------------------------------------------------#
+app.register_blueprint(assignment10)
 
 if __name__ == '__main__':
     app.run(debug=True)
